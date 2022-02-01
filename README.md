@@ -1,4 +1,9 @@
-# PyLamMOD: A *Py*thon-*Lam*mps toolbox for *M*aterials *O*ptimization and *D*esign
+# PyLamMOD
+
+A **Py**thon-**Lam**mps toolbox for **M**aterials **O**ptimization and **D**esign
+
+***
+
 Source code and data used for the project of designing antimicrobial nanomaterials with Kriging surrogate based optimization and DeepONet.
 
 Simulation based on [NUFEB](https://github.com/nufeb/NUFEB), and optimization based on [Bayesian Optimization](https://github.com/hanfengzhai/BayesianOptimization).

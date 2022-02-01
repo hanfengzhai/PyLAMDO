@@ -1,6 +1,6 @@
 # PyLamMOD
 
-*A* **Py***thon*-**Lam***mps* *toolbox for* **M***aterials* **O***ptimization and* **D***esign*
+*A* **Py***thon*-**Lam***mps* *package for* **M***aterials* **O***ptimization and* **D***esign*
 
 ***
 

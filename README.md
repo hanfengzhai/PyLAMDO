@@ -1,6 +1,6 @@
 # PyLamMOD
 
-A **Py**thon-**Lam**mps toolbox for <span style="color:blue">**M**aterials</span> **O**ptimization and **D**esign
+*A **Py**thon-**Lam**mps toolbox for **M**aterials **O**ptimization and **D**esign*
 
 ***
 

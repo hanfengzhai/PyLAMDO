@@ -1,6 +1,6 @@
 # PyLAMDO
 
-**Py**thon-**LA**MMPS toolkit for **M**aterials **D**esign & **O**ptimization
+**Py**thon-**LA**MMPS toolkit for **M**ultiscale, **M**ultiphysics, **M**aterials **D**esign & **O**ptimization
 
 ***
 

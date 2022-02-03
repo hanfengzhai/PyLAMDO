@@ -1,4 +1,4 @@
-# PyLaM3DO
+# PyLAM2MDO
 
 **Py**thon-**LA**MMPS toolkit for **M**aterials **D**esign & **O**ptimization
 

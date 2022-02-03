@@ -1,6 +1,6 @@
-# PyLamMOD
+# PyLa$M^3$DO
 
-**Py**thon-**Lam**mps toolkit for **M**aterials **D**esign & **O**ptimization
+**Py**thon-**LA**MMPS toolkit for **M**aterials **D**esign & **O**ptimization
 
 ***
 

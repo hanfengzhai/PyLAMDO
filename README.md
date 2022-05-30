@@ -4,4 +4,6 @@
 
 ***
 
+![The schematic for PyLAMMMDO](/doc/pylammdo.001.jpeg)
+
 Copyright &copy; 2022, Hanfeng Zhai, Cornell University

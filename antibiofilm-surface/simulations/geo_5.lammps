@@ -1,0 +1,116 @@
+# NUFEB simulation
+
+units si
+atom_style	bio
+atom_modify	map array sort 100 5.0e-8
+boundary	ff ff ff
+newton		off
+processors  * * 1
+
+comm_modify	vel yes
+read_data_bio atom-subs_small.in
+
+##############Define initial particle distribution##############
+# variable        rx equal ${varx}
+# variable        ry equal ${varx}
+variable        hx equal 11
+# variable        hy equal ${varx}
+
+lattice sc 4e-7 origin 0 0 0
+region reg_sub block 1 99 1 99 0 10
+region reg_ini block 0 100 0 100 ${hy} ${hm}
+region cone_1_1 cone z 10 10 ${rx} ${ry} ${hx} ${hy}
+region cone_2_1 cone z 30 10 ${rx} ${ry} ${hx} ${hy}
+region cone_3_1 cone z 50 10 ${rx} ${ry} ${hx} ${hy}
+region cone_4_1 cone z 70 10 ${rx} ${ry} ${hx} ${hy}
+region cone_5_1 cone z 90 10 ${rx} ${ry} ${hx} ${hy}
+# region subt_1 union 10 cone_1_1 cone_2_1 cone_3_1 cone_4_1 cone_5_1 cone_6_1 cone_7_1 cone_8_1 cone_9_1 cone_10_1
+region cone_1_2 cone z 10 30 ${rx} ${ry} ${hx} ${hy}
+region cone_2_2 cone z 30 30 ${rx} ${ry} ${hx} ${hy}
+region cone_3_2 cone z 50 30 ${rx} ${ry} ${hx} ${hy}
+region cone_4_2 cone z 70 30 ${rx} ${ry} ${hx} ${hy}
+region cone_5_2 cone z 90 30 ${rx} ${ry} ${hx} ${hy}
+# region subt_2 union 10 cone_1_2 cone_2_2 cone_3_2 cone_4_2 cone_5_2 cone_6_2 cone_7_2 cone_8_2 cone_9_2 cone_10_2
+region cone_1_3 cone z 10 50 ${rx} ${ry} ${hx} ${hy}
+region cone_2_3 cone z 30 50 ${rx} ${ry} ${hx} ${hy}
+region cone_3_3 cone z 50 50 ${rx} ${ry} ${hx} ${hy}
+region cone_4_3 cone z 70 50 ${rx} ${ry} ${hx} ${hy}
+region cone_5_3 cone z 90 50 ${rx} ${ry} ${hx} ${hy}
+# region subt_3 union 10 cone_1_3 cone_2_3 cone_3_3 cone_4_3 cone_5_3 cone_6_3 cone_7_3 cone_8_3 cone_9_3 cone_10_3
+region cone_1_4 cone z 10 70 ${rx} ${ry} ${hx} ${hy}
+region cone_2_4 cone z 30 70 ${rx} ${ry} ${hx} ${hy}
+region cone_3_4 cone z 50 70 ${rx} ${ry} ${hx} ${hy}
+region cone_4_4 cone z 70 70 ${rx} ${ry} ${hx} ${hy}
+region cone_5_4 cone z 90 70 ${rx} ${ry} ${hx} ${hy}
+# region subt_4 union 10 cone_1_4 cone_2_4 cone_3_4 cone_4_4 cone_5_4 cone_6_4 cone_7_4 cone_8_4 cone_9_4 cone_10_4
+region cone_1_5 cone z 10 90 ${rx} ${ry} ${hx} ${hy}
+region cone_2_5 cone z 30 90 ${rx} ${ry} ${hx} ${hy}
+region cone_3_5 cone z 50 90 ${rx} ${ry} ${hx} ${hy}
+region cone_4_5 cone z 70 90 ${rx} ${ry} ${hx} ${hy}
+region cone_5_5 cone z 90 90 ${rx} ${ry} ${hx} ${hy}
+# region subt union 11 subt_1 subt_2 subt_3 subt_4 subt_5 subt_6 subt_7 subt_8 subt_9 subt_10 reg_sub
+
+
+create_atoms 3 region reg_sub
+create_atoms 3 region cone_1_1 
+create_atoms 3 region cone_2_1 
+create_atoms 3 region cone_3_1 
+create_atoms 3 region cone_4_1 
+create_atoms 3 region cone_5_1 
+create_atoms 3 region cone_1_2 
+create_atoms 3 region cone_2_2 
+create_atoms 3 region cone_3_2 
+create_atoms 3 region cone_4_2 
+create_atoms 3 region cone_5_2 
+create_atoms 3 region cone_1_3 
+create_atoms 3 region cone_2_3 
+create_atoms 3 region cone_3_3 
+create_atoms 3 region cone_4_3 
+create_atoms 3 region cone_5_3 
+create_atoms 3 region cone_1_4 
+create_atoms 3 region cone_2_4 
+create_atoms 3 region cone_3_4 
+create_atoms 3 region cone_4_4 
+create_atoms 3 region cone_5_4 
+create_atoms 3 region cone_1_5 
+create_atoms 3 region cone_2_5 
+create_atoms 3 region cone_3_5 
+create_atoms 3 region cone_4_5 
+create_atoms 3 region cone_5_5 
+
+
+# Set properties for Heterotrophs
+set type 1 density 150#1100
+set type 1 diameter 1e-6
+set type 1 mass 7.854e-17#1.1112e-13
+# Ref: [1] density: https://bionumbers.hms.harvard.edu/bionumber.aspx?id=102239
+    #  [2] diameter: https://www.nature.com/articles/s41396-020-0706-3#MOESM1
+    #  [3] mass: calculated from [1] and [2]
+
+# Set properties for Titanium Ti-6Al-4V
+set type 3 density 4410#4410
+set type 3 diameter 5e-7
+set type 3 mass 9.1875e-17#1.0391e-14
+# Ref: [1] density: https://www.3t-am.com/sites/threeT/files/Titanium%20Ti6Al4V_Datasheet.pdf 
+    #  [2] diameter: customized
+    #  [3] mass: calculated from [1] and [2]
+
+group HET type 1
+group EPS type 2
+group DEAD type 3
+
+# neighbor	5e-7 bin
+
+neighbor	5e-7 bin
+neigh_modify	delay 0 one 5000
+
+##############Define DEM Variables&Commands##############
+
+pair_style  gran/hooke/history 1.e-4 NULL 1.e-5 NULL 0.0 1
+pair_coeff  * *
+
+timestep 10#10
+
+dump		id all custom 1000 sh5.dump id type diameter x y z fx fy fz vx vy vz
+
+run 100

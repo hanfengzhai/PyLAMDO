@@ -1,0 +1,348 @@
+# NUFEB simulation
+
+units si
+atom_style	bio
+atom_modify	map array sort 100 5.0e-8
+boundary	ff ff ff
+newton		off
+processors  * * 1
+
+comm_modify	vel yes
+read_data_bio atom-subs_small.in
+
+##############Define initial particle distribution##############
+# variable        rx equal ${varx}
+# variable        ry equal ${varx}
+variable        hx equal 11
+# variable        hy equal ${varx}
+
+lattice sc 4e-7 origin 0 0 0
+region reg_sub block 1 99 1 99 0 10
+region reg_ini block 0 100 0 100 ${hyplus} ${hm}
+region cone_1_1 cone z 5 5 ${rx} ${ry} ${hx} ${hy}
+region cone_2_1 cone z 15 5 ${rx} ${ry} ${hx} ${hy}
+region cone_3_1 cone z 25 5 ${rx} ${ry} ${hx} ${hy}
+region cone_4_1 cone z 35 5 ${rx} ${ry} ${hx} ${hy}
+region cone_5_1 cone z 45 5 ${rx} ${ry} ${hx} ${hy}
+region cone_6_1 cone z 55 5 ${rx} ${ry} ${hx} ${hy}
+region cone_7_1 cone z 65 5 ${rx} ${ry} ${hx} ${hy}
+region cone_8_1 cone z 75 5 ${rx} ${ry} ${hx} ${hy}
+region cone_9_1 cone z 85 5 ${rx} ${ry} ${hx} ${hy}
+region cone_10_1 cone z 95 5 ${rx} ${ry} ${hx} ${hy}
+# region subt_1 union 10 cone_1_1 cone_2_1 cone_3_1 cone_4_1 cone_5_1 cone_6_1 cone_7_1 cone_8_1 cone_9_1 cone_10_1
+region cone_1_2 cone z 5 15 ${rx} ${ry} ${hx} ${hy}
+region cone_2_2 cone z 15 15 ${rx} ${ry} ${hx} ${hy}
+region cone_3_2 cone z 25 15 ${rx} ${ry} ${hx} ${hy}
+region cone_4_2 cone z 35 15 ${rx} ${ry} ${hx} ${hy}
+region cone_5_2 cone z 45 15 ${rx} ${ry} ${hx} ${hy}
+region cone_6_2 cone z 55 15 ${rx} ${ry} ${hx} ${hy}
+region cone_7_2 cone z 65 15 ${rx} ${ry} ${hx} ${hy}
+region cone_8_2 cone z 75 15 ${rx} ${ry} ${hx} ${hy}
+region cone_9_2 cone z 85 15 ${rx} ${ry} ${hx} ${hy}
+region cone_10_2 cone z 95 15 ${rx} ${ry} ${hx} ${hy}
+# region subt_2 union 10 cone_1_2 cone_2_2 cone_3_2 cone_4_2 cone_5_2 cone_6_2 cone_7_2 cone_8_2 cone_9_2 cone_10_2
+region cone_1_3 cone z 5 25 ${rx} ${ry} ${hx} ${hy}
+region cone_2_3 cone z 15 25 ${rx} ${ry} ${hx} ${hy}
+region cone_3_3 cone z 25 25 ${rx} ${ry} ${hx} ${hy}
+region cone_4_3 cone z 35 25 ${rx} ${ry} ${hx} ${hy}
+region cone_5_3 cone z 45 25 ${rx} ${ry} ${hx} ${hy}
+region cone_6_3 cone z 55 25 ${rx} ${ry} ${hx} ${hy}
+region cone_7_3 cone z 65 25 ${rx} ${ry} ${hx} ${hy}
+region cone_8_3 cone z 75 25 ${rx} ${ry} ${hx} ${hy}
+region cone_9_3 cone z 85 25 ${rx} ${ry} ${hx} ${hy}
+region cone_10_3 cone z 95 25 ${rx} ${ry} ${hx} ${hy}
+# region subt_3 union 10 cone_1_3 cone_2_3 cone_3_3 cone_4_3 cone_5_3 cone_6_3 cone_7_3 cone_8_3 cone_9_3 cone_10_3
+region cone_1_4 cone z 5 35 ${rx} ${ry} ${hx} ${hy}
+region cone_2_4 cone z 15 35 ${rx} ${ry} ${hx} ${hy}
+region cone_3_4 cone z 25 35 ${rx} ${ry} ${hx} ${hy}
+region cone_4_4 cone z 35 35 ${rx} ${ry} ${hx} ${hy}
+region cone_5_4 cone z 45 35 ${rx} ${ry} ${hx} ${hy}
+region cone_6_4 cone z 55 35 ${rx} ${ry} ${hx} ${hy}
+region cone_7_4 cone z 65 35 ${rx} ${ry} ${hx} ${hy}
+region cone_8_4 cone z 75 35 ${rx} ${ry} ${hx} ${hy}
+region cone_9_4 cone z 85 35 ${rx} ${ry} ${hx} ${hy}
+region cone_10_4 cone z 95 35 ${rx} ${ry} ${hx} ${hy}
+# region subt_4 union 10 cone_1_4 cone_2_4 cone_3_4 cone_4_4 cone_5_4 cone_6_4 cone_7_4 cone_8_4 cone_9_4 cone_10_4
+region cone_1_5 cone z 5 45 ${rx} ${ry} ${hx} ${hy}
+region cone_2_5 cone z 15 45 ${rx} ${ry} ${hx} ${hy}
+region cone_3_5 cone z 25 45 ${rx} ${ry} ${hx} ${hy}
+region cone_4_5 cone z 35 45 ${rx} ${ry} ${hx} ${hy}
+region cone_5_5 cone z 45 45 ${rx} ${ry} ${hx} ${hy}
+region cone_6_5 cone z 55 45 ${rx} ${ry} ${hx} ${hy}
+region cone_7_5 cone z 65 45 ${rx} ${ry} ${hx} ${hy}
+region cone_8_5 cone z 75 45 ${rx} ${ry} ${hx} ${hy}
+region cone_9_5 cone z 85 45 ${rx} ${ry} ${hx} ${hy}
+region cone_10_5 cone z 95 45 ${rx} ${ry} ${hx} ${hy}
+# region subt_5 union 10 cone_1_5 cone_2_5 cone_3_5 cone_4_5 cone_5_5 cone_6_5 cone_7_5 cone_8_5 cone_9_5 cone_10_5
+region cone_1_6 cone z 5 55 ${rx} ${ry} ${hx} ${hy}
+region cone_2_6 cone z 15 55 ${rx} ${ry} ${hx} ${hy}
+region cone_3_6 cone z 25 55 ${rx} ${ry} ${hx} ${hy}
+region cone_4_6 cone z 35 55 ${rx} ${ry} ${hx} ${hy}
+region cone_5_6 cone z 45 55 ${rx} ${ry} ${hx} ${hy}
+region cone_6_6 cone z 55 55 ${rx} ${ry} ${hx} ${hy}
+region cone_7_6 cone z 65 55 ${rx} ${ry} ${hx} ${hy}
+region cone_8_6 cone z 75 55 ${rx} ${ry} ${hx} ${hy}
+region cone_9_6 cone z 85 55 ${rx} ${ry} ${hx} ${hy}
+region cone_10_6 cone z 95 55 ${rx} ${ry} ${hx} ${hy}
+# region subt_6 union 10 cone_1_6 cone_2_6 cone_3_6 cone_4_6 cone_5_6 cone_6_6 cone_7_6 cone_8_6 cone_9_6 cone_10_6
+region cone_1_7 cone z 5 65 ${rx} ${ry} ${hx} ${hy}
+region cone_2_7 cone z 15 65 ${rx} ${ry} ${hx} ${hy}
+region cone_3_7 cone z 25 65 ${rx} ${ry} ${hx} ${hy}
+region cone_4_7 cone z 35 65 ${rx} ${ry} ${hx} ${hy}
+region cone_5_7 cone z 45 65 ${rx} ${ry} ${hx} ${hy}
+region cone_6_7 cone z 55 65 ${rx} ${ry} ${hx} ${hy}
+region cone_7_7 cone z 65 65 ${rx} ${ry} ${hx} ${hy}
+region cone_8_7 cone z 75 65 ${rx} ${ry} ${hx} ${hy}
+region cone_9_7 cone z 85 65 ${rx} ${ry} ${hx} ${hy}
+region cone_10_7 cone z 95 65 ${rx} ${ry} ${hx} ${hy}
+# region subt_7 union 10 cone_1_7 cone_2_7 cone_3_7 cone_4_7 cone_5_7 cone_6_7 cone_7_7 cone_8_7 cone_9_7 cone_10_7
+region cone_1_8 cone z 5 75 ${rx} ${ry} ${hx} ${hy}
+region cone_2_8 cone z 15 75 ${rx} ${ry} ${hx} ${hy}
+region cone_3_8 cone z 25 75 ${rx} ${ry} ${hx} ${hy}
+region cone_4_8 cone z 35 75 ${rx} ${ry} ${hx} ${hy}
+region cone_5_8 cone z 45 75 ${rx} ${ry} ${hx} ${hy}
+region cone_6_8 cone z 55 75 ${rx} ${ry} ${hx} ${hy}
+region cone_7_8 cone z 65 75 ${rx} ${ry} ${hx} ${hy}
+region cone_8_8 cone z 75 75 ${rx} ${ry} ${hx} ${hy}
+region cone_9_8 cone z 85 75 ${rx} ${ry} ${hx} ${hy}
+region cone_10_8 cone z 95 75 ${rx} ${ry} ${hx} ${hy}
+# region subt_8 union 10 cone_1_8 cone_2_8 cone_3_8 cone_4_8 cone_5_8 cone_6_8 cone_7_8 cone_8_8 cone_9_8 cone_10_8
+region cone_1_9 cone z 5 85 ${rx} ${ry} ${hx} ${hy}
+region cone_2_9 cone z 15 85 ${rx} ${ry} ${hx} ${hy}
+region cone_3_9 cone z 25 85 ${rx} ${ry} ${hx} ${hy}
+region cone_4_9 cone z 35 85 ${rx} ${ry} ${hx} ${hy}
+region cone_5_9 cone z 45 85 ${rx} ${ry} ${hx} ${hy}
+region cone_6_9 cone z 55 85 ${rx} ${ry} ${hx} ${hy}
+region cone_7_9 cone z 65 85 ${rx} ${ry} ${hx} ${hy}
+region cone_8_9 cone z 75 85 ${rx} ${ry} ${hx} ${hy}
+region cone_9_9 cone z 85 85 ${rx} ${ry} ${hx} ${hy}
+region cone_10_9 cone z 95 85 ${rx} ${ry} ${hx} ${hy}
+# region subt_9 union 10 cone_1_9 cone_2_9 cone_3_9 cone_4_9 cone_5_9 cone_6_9 cone_7_9 cone_8_9 cone_9_9 cone_10_9
+region cone_1_10 cone z 5 95 ${rx} ${ry} ${hx} ${hy}
+region cone_2_10 cone z 15 95 ${rx} ${ry} ${hx} ${hy}
+region cone_3_10 cone z 25 95 ${rx} ${ry} ${hx} ${hy}
+region cone_4_10 cone z 35 95 ${rx} ${ry} ${hx} ${hy}
+region cone_5_10 cone z 45 95 ${rx} ${ry} ${hx} ${hy}
+region cone_6_10 cone z 55 95 ${rx} ${ry} ${hx} ${hy}
+region cone_7_10 cone z 65 95 ${rx} ${ry} ${hx} ${hy}
+region cone_8_10 cone z 75 95 ${rx} ${ry} ${hx} ${hy}
+region cone_9_10 cone z 85 95 ${rx} ${ry} ${hx} ${hy}
+region cone_10_10 cone z 95 95 ${rx} ${ry} ${hx} ${hy}
+# region subt_10 union 10 cone_1_10 cone_2_10 cone_3_10 cone_4_10 cone_5_10 cone_6_10 cone_7_10 cone_8_10 cone_9_10 cone_10_10
+# region subt union 11 subt_1 subt_2 subt_3 subt_4 subt_5 subt_6 subt_7 subt_8 subt_9 subt_10 reg_sub
+
+create_atoms 1 random 50 6534 reg_ini
+create_atoms 3 region reg_sub
+create_atoms 3 region cone_1_1 
+create_atoms 3 region cone_2_1 
+create_atoms 3 region cone_3_1 
+create_atoms 3 region cone_4_1 
+create_atoms 3 region cone_5_1 
+create_atoms 3 region cone_6_1 
+create_atoms 3 region cone_7_1 
+create_atoms 3 region cone_8_1 
+create_atoms 3 region cone_9_1 
+create_atoms 3 region cone_10_1
+create_atoms 3 region cone_1_2 
+create_atoms 3 region cone_2_2 
+create_atoms 3 region cone_3_2 
+create_atoms 3 region cone_4_2 
+create_atoms 3 region cone_5_2 
+create_atoms 3 region cone_6_2 
+create_atoms 3 region cone_7_2 
+create_atoms 3 region cone_8_2 
+create_atoms 3 region cone_9_2 
+create_atoms 3 region cone_10_2
+create_atoms 3 region cone_1_3 
+create_atoms 3 region cone_2_3 
+create_atoms 3 region cone_3_3 
+create_atoms 3 region cone_4_3 
+create_atoms 3 region cone_5_3 
+create_atoms 3 region cone_6_3 
+create_atoms 3 region cone_7_3 
+create_atoms 3 region cone_8_3 
+create_atoms 3 region cone_9_3 
+create_atoms 3 region cone_10_3
+create_atoms 3 region cone_1_4 
+create_atoms 3 region cone_2_4 
+create_atoms 3 region cone_3_4 
+create_atoms 3 region cone_4_4 
+create_atoms 3 region cone_5_4 
+create_atoms 3 region cone_6_4 
+create_atoms 3 region cone_7_4 
+create_atoms 3 region cone_8_4 
+create_atoms 3 region cone_9_4 
+create_atoms 3 region cone_10_4
+create_atoms 3 region cone_1_5 
+create_atoms 3 region cone_2_5 
+create_atoms 3 region cone_3_5 
+create_atoms 3 region cone_4_5 
+create_atoms 3 region cone_5_5 
+create_atoms 3 region cone_6_5 
+create_atoms 3 region cone_7_5 
+create_atoms 3 region cone_8_5 
+create_atoms 3 region cone_9_5 
+create_atoms 3 region cone_10_5
+create_atoms 3 region cone_1_6 
+create_atoms 3 region cone_2_6 
+create_atoms 3 region cone_3_6 
+create_atoms 3 region cone_4_6 
+create_atoms 3 region cone_5_6 
+create_atoms 3 region cone_6_6 
+create_atoms 3 region cone_7_6 
+create_atoms 3 region cone_8_6 
+create_atoms 3 region cone_9_6 
+create_atoms 3 region cone_10_6
+create_atoms 3 region cone_1_7 
+create_atoms 3 region cone_2_7 
+create_atoms 3 region cone_3_7 
+create_atoms 3 region cone_4_7 
+create_atoms 3 region cone_5_7 
+create_atoms 3 region cone_6_7 
+create_atoms 3 region cone_7_7 
+create_atoms 3 region cone_8_7 
+create_atoms 3 region cone_9_7 
+create_atoms 3 region cone_10_7
+create_atoms 3 region cone_1_8 
+create_atoms 3 region cone_2_8 
+create_atoms 3 region cone_3_8 
+create_atoms 3 region cone_4_8 
+create_atoms 3 region cone_5_8 
+create_atoms 3 region cone_6_8 
+create_atoms 3 region cone_7_8 
+create_atoms 3 region cone_8_8 
+create_atoms 3 region cone_9_8 
+create_atoms 3 region cone_10_8
+create_atoms 3 region cone_1_9 
+create_atoms 3 region cone_2_9 
+create_atoms 3 region cone_3_9 
+create_atoms 3 region cone_4_9 
+create_atoms 3 region cone_5_9 
+create_atoms 3 region cone_6_9 
+create_atoms 3 region cone_7_9 
+create_atoms 3 region cone_8_9 
+create_atoms 3 region cone_9_9 
+create_atoms 3 region cone_10_9
+create_atoms 3 region cone_1_10 
+create_atoms 3 region cone_2_10 
+create_atoms 3 region cone_3_10 
+create_atoms 3 region cone_4_10 
+create_atoms 3 region cone_5_10 
+create_atoms 3 region cone_6_10 
+create_atoms 3 region cone_7_10 
+create_atoms 3 region cone_8_10 
+create_atoms 3 region cone_9_10 
+create_atoms 3 region cone_10_10
+
+# Set properties for Heterotrophs
+set type 1 density 150#1100
+set type 1 diameter 1e-6
+set type 1 mass 7.854e-17#1.1112e-13
+# Ref: [1] density: https://bionumbers.hms.harvard.edu/bionumber.aspx?id=102239
+    #  [2] diameter: https://www.nature.com/articles/s41396-020-0706-3#MOESM1
+    #  [3] mass: calculated from [1] and [2]
+
+# Set properties for Titanium Ti-6Al-4V
+set type 3 density 4410#4410
+set type 3 diameter 5e-7
+set type 3 mass 9.1875e-17#1.0391e-14
+# Ref: [1] density: https://www.3t-am.com/sites/threeT/files/Titanium%20Ti6Al4V_Datasheet.pdf 
+    #  [2] diameter: customized
+    #  [3] mass: calculated from [1] and [2]
+
+group HET type 1
+group EPS type 2
+group DEAD type 3
+
+# neighbor	5e-7 bin
+
+neighbor	5e-7 bin
+neigh_modify	delay 0 one 5000
+
+##############Define DEM Variables&Commands##############
+
+pair_style  gran/hooke/history 1.e-4 NULL 1.e-5 NULL 0.0 1
+pair_coeff  * *
+
+timestep 10#10
+
+
+fix 1 all nve/limit 1e-8
+fix fv all viscous 1e-5
+
+fix fz1 DEAD freeze
+velocity DEAD set 0.0 0.0 0.0 units box
+fix nomove DEAD move linear 0.0 0.0 0.0 units box
+
+
+fix zw all wall/gran hooke/history 2000 NULL 500.0 NULL 1.5 0 zplane  0.0  1e-04
+
+variable kanc equal 50
+
+#fix zwa all walladh v_kanc zplane  0.0  1e-04
+
+##############Define IBm Variables##############
+
+#variables used in fix eps_extract
+variable EPSdens equal 30
+variable EPSratio equal 1.3
+
+#variables used in fix division
+variable divDia equal 1.36e-6
+
+#variables used in fix kinetics 
+variable diffT equal 1e-4
+variable tol equal 5e-6
+variable layer equal -1
+
+#variables used in fix death
+variable deadDia equal 9e-7
+
+#variables used in fix shear
+variable viscosity equal 0.001
+variable shearRate equal 0.3
+variable height equal 0.0
+
+variable ke equal 1e+8
+
+##############Define IBm Commands##############
+
+fix j1 all epsadh 1 v_ke 1
+fix k1 all kinetics 100 30 30 30 v_diffT v_layer niter 100
+fix kgm all kinetics/growth/monod epsdens 30
+fix g1 all kinetics/diffusion v_tol dcflag 2
+fix d1 all divide 100 v_EPSdens v_divDia 64564
+fix e1 HET eps_extract 100 v_EPSratio v_EPSdens 53453
+
+##############Define IBm Computes##############
+
+compute myNtypes all ntypes
+compute myMass all biomass
+compute myCon all avg_con
+compute myHeight all avg_height
+compute myRough all roughness
+
+##############Simulation Output##############
+# dump		du1 all vtk 1000 atom_*.vtu id type diameter x y z
+# dump		du2 all grid 1000 grid_%_*.vti con
+dump		id all custom 1000 sh10.dump id type diameter x y z fx fy fz vx vy vz
+dump            du3 all bio 100 avg_height roughness biomass ntypes avg_con 
+thermo_style    custom step cpu atoms c_myNtypes[*] c_myMass[*] c_myCon[*]
+thermo		100
+thermo_modify	lost ignore
+
+
+run 20000
+
+# timestep 2.5
+
+# unfix kgm
+# unfix g1
+# unfix d1
+# unfix e1
+
+# fix s1 all shear 1 v_viscosity v_shearRate v_height zx 0 100
+
+
+# # dump		id all custom 1000 geo.dump id type diameter x y z fx fy fz vx vy vz
+# run 100

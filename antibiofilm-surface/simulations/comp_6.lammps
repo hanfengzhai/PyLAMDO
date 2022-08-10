@@ -1,0 +1,216 @@
+# NUFEB simulation
+
+units si
+atom_style	bio
+atom_modify	map array sort 100 5.0e-8
+boundary	ff ff ff
+newton		off
+processors  * * 1
+
+comm_modify	vel yes
+read_data_bio atom-subs_small.in
+
+##############Define initial particle distribution##############
+# variable        rx equal ${varx}
+# variable        ry equal ${varx}
+variable        hx equal 11
+# variable        hy equal ${varx}
+
+lattice sc 4e-7 origin 0 0 0
+region reg_sub block 1 99 1 99 0 10
+region reg_ini block 0 100 0 100 ${hyplus} ${hm}
+region cone_1_1 cone z 8.3 8.3 ${rx} ${ry} ${hx} ${hy}
+region cone_2_1 cone z 25.0 8.3 ${rx} ${ry} ${hx} ${hy}
+region cone_3_1 cone z 41.6 8.3 ${rx} ${ry} ${hx} ${hy}
+region cone_4_1 cone z 58.3 8.3 ${rx} ${ry} ${hx} ${hy}
+region cone_5_1 cone z 75.0 8.3 ${rx} ${ry} ${hx} ${hy}
+region cone_6_1 cone z 91.6 8.3 ${rx} ${ry} ${hx} ${hy}
+# region subt_1 union 10 cone_1_1 cone_2_1 cone_3_1 cone_4_1 cone_5_1 cone_6_1 cone_7_1 cone_8_1 cone_9_1 cone_10_1
+region cone_1_2 cone z 8.3 25.0 ${rx} ${ry} ${hx} ${hy}
+region cone_2_2 cone z 25.0 25.0 ${rx} ${ry} ${hx} ${hy}
+region cone_3_2 cone z 41.6 25.0 ${rx} ${ry} ${hx} ${hy}
+region cone_4_2 cone z 58.3 25.0 ${rx} ${ry} ${hx} ${hy}
+region cone_5_2 cone z 75.0 25.0 ${rx} ${ry} ${hx} ${hy}
+region cone_6_2 cone z 91.6 25.0 ${rx} ${ry} ${hx} ${hy}
+# region subt_2 union 10 cone_1_2 cone_2_2 cone_3_2 cone_4_2 cone_5_2 cone_6_2 cone_7_2 cone_8_2 cone_9_2 cone_10_2
+region cone_1_3 cone z 8.3 41.6 ${rx} ${ry} ${hx} ${hy}
+region cone_2_3 cone z 25.0 41.6 ${rx} ${ry} ${hx} ${hy}
+region cone_3_3 cone z 41.6 41.6 ${rx} ${ry} ${hx} ${hy}
+region cone_4_3 cone z 58.3 41.6 ${rx} ${ry} ${hx} ${hy}
+region cone_5_3 cone z 75.0 41.6 ${rx} ${ry} ${hx} ${hy}
+region cone_6_3 cone z 91.6 41.6 ${rx} ${ry} ${hx} ${hy}
+# region subt_3 union 10 cone_1_3 cone_2_3 cone_3_3 cone_4_3 cone_5_3 cone_6_3 cone_7_3 cone_8_3 cone_9_3 cone_10_3
+region cone_1_4 cone z 8.3 58.3 ${rx} ${ry} ${hx} ${hy}
+region cone_2_4 cone z 25.0 58.3 ${rx} ${ry} ${hx} ${hy}
+region cone_3_4 cone z 41.6 58.3 ${rx} ${ry} ${hx} ${hy}
+region cone_4_4 cone z 58.3 58.3 ${rx} ${ry} ${hx} ${hy}
+region cone_5_4 cone z 75.0 58.3 ${rx} ${ry} ${hx} ${hy}
+region cone_6_4 cone z 91.6 58.3 ${rx} ${ry} ${hx} ${hy}
+# region subt_4 union 10 cone_1_4 cone_2_4 cone_3_4 cone_4_4 cone_5_4 cone_6_4 cone_7_4 cone_8_4 cone_9_4 cone_10_4
+region cone_1_5 cone z 8.3 75.0 ${rx} ${ry} ${hx} ${hy}
+region cone_2_5 cone z 25.0 75.0 ${rx} ${ry} ${hx} ${hy}
+region cone_3_5 cone z 41.6 75.0 ${rx} ${ry} ${hx} ${hy}
+region cone_4_5 cone z 58.3 75.0 ${rx} ${ry} ${hx} ${hy}
+region cone_5_5 cone z 75.0 75.0 ${rx} ${ry} ${hx} ${hy}
+region cone_6_5 cone z 91.6 75.0 ${rx} ${ry} ${hx} ${hy}
+# region subt_5 union 10 cone_1_5 cone_2_5 cone_3_5 cone_4_5 cone_5_5 cone_6_5 cone_7_5 cone_8_5 cone_9_5 cone_10_5
+region cone_1_6 cone z 8.3 91.6 ${rx} ${ry} ${hx} ${hy}
+region cone_2_6 cone z 25.0 91.6 ${rx} ${ry} ${hx} ${hy}
+region cone_3_6 cone z 41.6 91.6 ${rx} ${ry} ${hx} ${hy}
+region cone_4_6 cone z 58.3 91.6 ${rx} ${ry} ${hx} ${hy}
+region cone_5_6 cone z 75.0 91.6 ${rx} ${ry} ${hx} ${hy}
+region cone_6_6 cone z 91.6 91.6 ${rx} ${ry} ${hx} ${hy}
+# region subt union 11 subt_1 subt_2 subt_3 subt_4 subt_5 subt_6 subt_7 subt_8 subt_9 subt_10 reg_sub
+
+create_atoms 1 random 50 6534 reg_ini
+create_atoms 3 region reg_sub
+create_atoms 3 region cone_1_1 
+create_atoms 3 region cone_2_1 
+create_atoms 3 region cone_3_1 
+create_atoms 3 region cone_4_1 
+create_atoms 3 region cone_5_1 
+create_atoms 3 region cone_6_1 
+create_atoms 3 region cone_1_2 
+create_atoms 3 region cone_2_2 
+create_atoms 3 region cone_3_2 
+create_atoms 3 region cone_4_2 
+create_atoms 3 region cone_5_2 
+create_atoms 3 region cone_6_2 
+create_atoms 3 region cone_1_3 
+create_atoms 3 region cone_2_3 
+create_atoms 3 region cone_3_3 
+create_atoms 3 region cone_4_3 
+create_atoms 3 region cone_5_3 
+create_atoms 3 region cone_6_3 
+create_atoms 3 region cone_1_4 
+create_atoms 3 region cone_2_4 
+create_atoms 3 region cone_3_4 
+create_atoms 3 region cone_4_4 
+create_atoms 3 region cone_5_4 
+create_atoms 3 region cone_6_4 
+create_atoms 3 region cone_1_5 
+create_atoms 3 region cone_2_5 
+create_atoms 3 region cone_3_5 
+create_atoms 3 region cone_4_5 
+create_atoms 3 region cone_5_5 
+create_atoms 3 region cone_6_5 
+create_atoms 3 region cone_1_6 
+create_atoms 3 region cone_2_6 
+create_atoms 3 region cone_3_6 
+create_atoms 3 region cone_4_6 
+create_atoms 3 region cone_5_6 
+create_atoms 3 region cone_6_6 
+
+# Set properties for Heterotrophs
+set type 1 density 150#1100
+set type 1 diameter 1e-6
+set type 1 mass 7.854e-17#1.1112e-13
+# Ref: [1] density: https://bionumbers.hms.harvard.edu/bionumber.aspx?id=102239
+    #  [2] diameter: https://www.nature.com/articles/s41396-020-0706-3#MOESM1
+    #  [3] mass: calculated from [1] and [2]
+
+# Set properties for Titanium Ti-6Al-4V
+set type 3 density 4410#4410
+set type 3 diameter 5e-7
+set type 3 mass 9.1875e-17#1.0391e-14
+# Ref: [1] density: https://www.3t-am.com/sites/threeT/files/Titanium%20Ti6Al4V_Datasheet.pdf 
+    #  [2] diameter: customized
+    #  [3] mass: calculated from [1] and [2]
+
+group HET type 1
+group EPS type 2
+group DEAD type 3
+
+# neighbor	5e-7 bin
+
+neighbor	5e-7 bin
+neigh_modify	delay 0 one 5000
+
+##############Define DEM Variables&Commands##############
+
+pair_style  gran/hooke/history 1.e-4 NULL 1.e-5 NULL 0.0 1
+pair_coeff  * *
+
+timestep 10#10
+
+
+fix 1 all nve/limit 1e-8
+fix fv all viscous 1e-5
+
+fix fz1 DEAD freeze
+velocity DEAD set 0.0 0.0 0.0 units box
+fix nomove DEAD move linear 0.0 0.0 0.0 units box
+
+
+fix zw all wall/gran hooke/history 2000 NULL 500.0 NULL 1.5 0 zplane  0.0  1e-04
+
+variable kanc equal 50
+
+#fix zwa all walladh v_kanc zplane  0.0  1e-04
+
+##############Define IBm Variables##############
+
+#variables used in fix eps_extract
+variable EPSdens equal 30
+variable EPSratio equal 1.3
+
+#variables used in fix division
+variable divDia equal 1.36e-6
+
+#variables used in fix kinetics 
+variable diffT equal 1e-4
+variable tol equal 5e-6
+variable layer equal -1
+
+#variables used in fix death
+variable deadDia equal 9e-7
+
+#variables used in fix shear
+variable viscosity equal 0.001
+variable shearRate equal 0.3
+variable height equal 0.0
+
+variable ke equal 1e+8
+
+##############Define IBm Commands##############
+
+fix j1 all epsadh 1 v_ke 1
+fix k1 all kinetics 100 30 30 30 v_diffT v_layer niter 100
+fix kgm all kinetics/growth/monod epsdens 30
+fix g1 all kinetics/diffusion v_tol dcflag 2
+fix d1 all divide 100 v_EPSdens v_divDia 64564
+fix e1 HET eps_extract 100 v_EPSratio v_EPSdens 53453
+
+##############Define IBm Computes##############
+
+compute myNtypes all ntypes
+compute myMass all biomass
+compute myCon all avg_con
+compute myHeight all avg_height
+compute myRough all roughness
+
+##############Simulation Output##############
+# dump		du1 all vtk 1000 atom_*.vtu id type diameter x y z
+# dump		du2 all grid 1000 grid_%_*.vti con
+dump		id all custom 1000 sh6.dump id type diameter x y z fx fy fz vx vy vz
+dump            du3 all bio 100 avg_height roughness biomass ntypes avg_con 
+thermo_style    custom step cpu atoms c_myNtypes[*] c_myMass[*] c_myCon[*]
+thermo		100
+thermo_modify	lost ignore
+
+
+run 20000
+
+# timestep 2.5
+
+# unfix kgm
+# unfix g1
+# unfix d1
+# unfix e1
+
+# fix s1 all shear 1 v_viscosity v_shearRate v_height zx 0 100
+
+
+# # dump		id all custom 1000 geo.dump id type diameter x y z fx fy fz vx vy vz
+# run 100
+

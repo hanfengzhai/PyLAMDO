@@ -21,15 +21,8 @@ pages = {null},
 year = {0},
 doi = {10.1021/acsbiomaterials.2c01079},
     note ={PMID: 36537745},
-
-URL = { 
-        https://doi.org/10.1021/acsbiomaterials.2c01079
     
-},
-eprint = { 
-        https://doi.org/10.1021/acsbiomaterials.2c01079
-    
-}
-
+URL = {https://doi.org/10.1021/acsbiomaterials.2c01079},
+eprint = {https://doi.org/10.1021/acsbiomaterials.2c01079}
 }
 ```

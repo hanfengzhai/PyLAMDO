@@ -13,18 +13,17 @@ Copyright &copy; 2022, Hanfeng Zhai, Cornell University
 
 [Computational Design of Antimicrobial Active Surfaces via Automated Bayesian Optimization](https://doi.org/10.1021/acsbiomaterials.2c01079)
 ```
-@article{doi:10.1021/acsbiomaterials.2c01079,
-author = {Zhai, Hanfeng and Yeo, Jingjie},
-title = {Computational Design of Antimicrobial Active Surfaces via Automated Bayesian Optimization},
-journal = {ACS Biomaterials Science \& Engineering},
-volume = {0},
-number = {0},
-pages = {null},
-year = {0},
-doi = {10.1021/acsbiomaterials.2c01079},
-    note ={PMID: 36537745},
-    
-URL = {https://doi.org/10.1021/acsbiomaterials.2c01079},
-eprint = {https://doi.org/10.1021/acsbiomaterials.2c01079}
+@article{Zhai2022,
+  doi = {10.1021/acsbiomaterials.2c01079},
+  url = {https://doi.org/10.1021/acsbiomaterials.2c01079},
+  year = {2022},
+  month = dec,
+  publisher = {American Chemical Society ({ACS})},
+  volume = {9},
+  number = {1},
+  pages = {269--279},
+  author = {Hanfeng Zhai and Jingjie Yeo},
+  title = {Computational Design of Antimicrobial Active Surfaces via Automated Bayesian Optimization},
+  journal = {{ACS} Biomaterials Science {\&}amp$\mathsemicolon$ Engineering}
 }
 ```

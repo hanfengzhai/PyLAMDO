@@ -1,0 +1,175 @@
+clear;clc;close all
+
+%% load data for 2D porous membrane
+UCB2D = load('../data/pure/UCB_2D.txt');
+EI2D = load('../data/pure/EI_2D.txt');
+EI2D = cut15(EI2D);UCB2D = cut15(UCB2D);
+
+%% plot for 2D case
+
+des_space_plot(EI2D, UCB2D,500);
+% close all
+%% characterize the design space for 2D membranes
+test_n_2D = [29221.0,29234.0,29128.0,29084.0,29374.0,29302.0,29372.0,29260.0,28169.0,0.0,0.0,12321.0,1358.0,0.0,0.0];
+test_r_2D = [0.0,0.0,29429.0,29429.0,29717.0,30195.0,30860.0,30860.0,31277.0];
+charac_n = [30925.0,30717.0,30868.0,31108.0,31142.0,31292.0,31088.0,31151.0,31214.0,31277.0,31086.0,31099.0,31074.0,31188.0,31161.0];
+charac_r = [0.0,0.0,19703.0,29450.0,29920.0,30173.0,30562.0,30903.0,31161.0];
+r_list_2D = 0.1:0.1:0.9;
+r_bench_2D = 0.9; n_bench_2D = 15;
+r_test_2D = 0.2; n_test_2D = 10;
+characterization_benchmark(charac_n,charac_r,r_list_2D,EI2D, r_bench_2D,n_bench_2D,test_n_2D,test_r_2D,n_test_2D,r_test_2D);
+
+%% load data for lattice metamaterials and 3D porous media
+
+EI3D = load('../data/pure/3D_EI_.txt');EI3D = cut15(EI3D);
+EILat = load('../data/pure/Lat_EI_.txt');EILat = cut15(EILat);
+
+%% plot for 3D case
+des_space_single(EI3D,500,0.5,1.2,300,100,0.9,0.95,1,2);
+% close all
+%% characterize the design space for 3D porous materials
+test_n_3D = [28481.0,27650.0,28506.0,28213.0,28390.0,28305.0,28488.0,28224.0,28219.0,27832.0,28102.0,27764.0,27732.0,27618.0,27453.0];
+test_r_3D = [28054.0,28198.0,28243.0,28262.0,28120.0,28314.0,28425.0,28542.0];
+n_3D = [24522.0,28873.0,30341.0,30066.0,30079.0,30044.0,30233.0,29146.0,29213.0,27757.0,27428.0,19757.0,16522.0,14849.0,17661.0];
+r_3D = [28488.0,28662.0,29075.0,29313.0,29824.0,29998.0,30233.0,29556.0];
+r_list_3D = 0.5:0.1:1.2;
+r_bench_3D = 1.1; n_bench_3D = 7;
+r_test_3D = 0.5; n_test_3D = 15;
+characterization_benchmark(n_3D,r_3D,r_list_3D,EI3D,r_bench_3D,n_bench_3D,test_n_3D,test_r_3D, n_test_3D,r_test_3D)
+%% plot for Lattice case
+
+des_space_single(EILat,300,0.1,0.5,100,100,0.9,0.95,1,3);
+% close all
+%% characterize the design space for lattice metamaterials
+test_n_lat = [27847.0,27513.0,27644.0,28570.0,27881.0,28113.0,28066.0,28040.0,27086.0,27285.0,26813.0,27759.0,27461.0,28328.0,27881.0];
+test_r_lat = [27881,25546,23256,23779,7235];
+n_lat = [29856.0,28148.0,28472.0,29802.0,30069.0,29785.0,29667.0,29299.0,28662.0,27885.0,27363.0,25652.0,24252.0,23736.0,6372.0];
+r_lat = [28113.0,28197.0,28540.0,29232.0,29960.0];
+r_list_lat = 0.1:0.1:0.5;
+r_bench_Lat = 0.45; n_bench_Lat = 6;
+r_test_Lat = 0.1; n_test_Lat = 15;
+characterization_benchmark(n_lat,r_lat,r_list_lat,EILat,r_bench_Lat,n_bench_Lat,test_n_lat,test_r_lat,n_test_Lat,r_test_Lat)
+% close all
+%% comparison for biofilm growth
+figure
+biofilmgrow = load('../data/pure/comparison.txt');
+grow_vacuum = biofilmgrow(1:151,4:5);
+grow_porous = biofilmgrow(152:end,4:5);
+plot(1:100:15000 +1,grow_vacuum(:,1)+grow_vacuum(:,2),'Color','b','LineStyle','-','LineWidth',3); 
+hold on; plot(1:100:15000 +1,grow_porous(:,1) + grow_porous(:,2),'Color','r','LineStyle','-.','LineWidth',3);
+ylabel('$\mathcal{N}_{\rm bio}^{\rm total}$');
+xlabel('Iterations ($\tilde{\tau}$)');
+xlim([0,15000])
+ax = gca;ax.PlotBoxAspectRatio = [2,1,1];
+legend({'Vacuum Space','Porous Materials'}, 'Location', 'northwest', 'Interpreter', 'latex');
+texadd; colorbar off
+%%
+% zoomed view
+figure
+plot(11900:100:15000,grow_vacuum(120:end,1)+grow_vacuum(120:end,2),'Color','b','LineStyle','-','LineWidth',3); 
+hold on; plot(11900:100:15000 ,grow_porous(120:end,1) + grow_porous(120:end,2),'Color','r','LineStyle','-.','LineWidth',3);
+addgradient
+xlim([12000,15000])
+ax = gca;ax.PlotBoxAspectRatio = [1,2,1];
+texadd; colorbar off
+%% ouput perpendicular spatial coordinates
+% Ovito: Scatter Plot -> Particle Type & Position Z -> Data Table ->
+% Sublime Text -> .txt files
+
+Zcoord_porous = load('../data/pure/porous_mat_comparison.txt');
+Zcoord_vacuum = load('../data/pure/vacuum_comparison.txt');
+Zcoord_vacuum = Zcoord_vacuum(Zcoord_vacuum(:,1) ~= 3, :);
+Zcoord_porous = Zcoord_porous(Zcoord_porous(:,1) ~= 3, :);
+Zcoord_porous = Zcoord_porous(:,2)*1e6;Zcoord_vacuum = Zcoord_vacuum(:,2)*1e6;
+
+% Define the number of intervals to use
+num_intervals = 100;
+z_edges_porous = linspace(min(Zcoord_porous), max(Zcoord_porous), num_intervals+1);
+z_edges_vacuum = linspace(min(Zcoord_vacuum), max(Zcoord_vacuum), num_intervals+1);
+
+% Use the histcounts function to count the number of particles in each interval for the porous and vacuum regions
+porous_counts = histcounts(Zcoord_porous, z_edges_porous);
+vacuum_counts = histcounts(Zcoord_vacuum, z_edges_vacuum);
+figure
+h1 = barh(z_edges_porous(1:num_intervals),porous_counts');hold on
+h2 = barh(z_edges_vacuum(1:num_intervals),vacuum_counts');
+set(h1, 'FaceAlpha', 0.5, 'FaceColor', 'r'); set(h2, 'FaceAlpha', 0.5, 'FaceColor', 'b'); % Set the transparency of the bars
+xlim([0,3000]);ylim([0,50])
+ylabel('Z Coordinate [$\mu$m]');
+xlabel('Bacteria Counts');
+legend({'Porous Materials', 'Vacuum Space'}, 'Interpreter', 'latex');
+texadd;addgradient
+ax = gca;ax.PlotBoxAspectRatio = [1,2,1];
+colorbar off
+
+%% zoomed view
+charac_zoom(charac_n,charac_r,r_list_2D,EI2D, r_bench_2D,n_bench_2D,test_n_2D,test_r_2D,n_test_2D,r_test_2D);
+charac_zoom(n_3D,r_3D,r_list_3D,EI3D,r_bench_3D,n_bench_3D,test_n_3D,test_r_3D, n_test_3D,r_test_3D)
+charac_zoom(n_lat,r_lat,r_list_lat,EILat,r_bench_Lat,n_bench_Lat,test_n_lat,test_r_lat,n_test_Lat,r_test_Lat)
+
+%% Reply to Review
+% for 2D membrane
+
+vacuum_region = [calc_vol(0.1,1),calc_vol(0.2,1),calc_vol(0.3,1),calc_vol(0.4,1),calc_vol(0.5,1),calc_vol(0.6,1),calc_vol(0.7,1),calc_vol(0.8,1),calc_vol(0.9,1);...
+    calc_vol(0.1,2),calc_vol(0.2,2),calc_vol(0.3,2),calc_vol(0.4,2),calc_vol(0.5,2),calc_vol(0.6,2),calc_vol(0.7,2),calc_vol(0.8,2),calc_vol(0.9,2);...
+    calc_vol(0.1,3),calc_vol(0.2,3),calc_vol(0.3,3),calc_vol(0.4,3),calc_vol(0.5,3),calc_vol(0.6,3),calc_vol(0.7,3),calc_vol(0.8,3),calc_vol(0.9,3);...
+    calc_vol(0.1,4),calc_vol(0.2,4),calc_vol(0.3,4),calc_vol(0.4,4),calc_vol(0.5,4),calc_vol(0.6,4),calc_vol(0.7,4),calc_vol(0.8,4),calc_vol(0.9,4);...
+    calc_vol(0.1,5),calc_vol(0.2,5),calc_vol(0.3,5),calc_vol(0.4,5),calc_vol(0.5,5),calc_vol(0.6,5),calc_vol(0.7,5),calc_vol(0.8,5),calc_vol(0.9,5);...
+    calc_vol(0.1,6),calc_vol(0.2,6),calc_vol(0.3,6),calc_vol(0.4,6),calc_vol(0.5,6),calc_vol(0.6,6),calc_vol(0.7,6),calc_vol(0.8,6),calc_vol(0.9,6);...
+    calc_vol(0.1,7),calc_vol(0.2,7),calc_vol(0.3,7),calc_vol(0.4,7),calc_vol(0.5,7),calc_vol(0.6,7),calc_vol(0.7,7),calc_vol(0.8,7),calc_vol(0.9,7);...
+    calc_vol(0.1,8),calc_vol(0.2,8),calc_vol(0.3,8),calc_vol(0.4,8),calc_vol(0.5,8),calc_vol(0.6,8),calc_vol(0.7,8),calc_vol(0.8,8),calc_vol(0.9,8);...
+    calc_vol(0.1,9),calc_vol(0.2,9),calc_vol(0.3,9),calc_vol(0.4,9),calc_vol(0.5,9),calc_vol(0.6,9),calc_vol(0.7,9),calc_vol(0.8,9),calc_vol(0.9,9);...
+    calc_vol(0.1,10),calc_vol(0.2,10),calc_vol(0.3,10),calc_vol(0.4,10),calc_vol(0.5,10),calc_vol(0.6,10),calc_vol(0.7,10),calc_vol(0.8,10),calc_vol(0.9,10);...
+    calc_vol(0.1,11),calc_vol(0.2,11),calc_vol(0.3,11),calc_vol(0.4,11),calc_vol(0.5,11),calc_vol(0.6,11),calc_vol(0.7,11),calc_vol(0.8,11),calc_vol(0.9,11);...
+    calc_vol(0.1,12),calc_vol(0.2,12),calc_vol(0.3,12),calc_vol(0.4,12),calc_vol(0.5,12),calc_vol(0.6,12),calc_vol(0.7,12),calc_vol(0.8,12),calc_vol(0.9,12);...
+    calc_vol(0.1,13),calc_vol(0.2,13),calc_vol(0.3,13),calc_vol(0.4,13),calc_vol(0.5,13),calc_vol(0.6,13),calc_vol(0.7,13),calc_vol(0.8,13),calc_vol(0.9,13);...
+    calc_vol(0.1,14),calc_vol(0.2,14),calc_vol(0.3,14),calc_vol(0.4,14),calc_vol(0.5,14),calc_vol(0.6,14),calc_vol(0.7,14),calc_vol(0.8,14),calc_vol(0.9,14);...
+    calc_vol(0.1,15),calc_vol(0.2,15),calc_vol(0.3,15),calc_vol(0.4,15),calc_vol(0.5,15),calc_vol(0.6,15),calc_vol(0.7,15),calc_vol(0.8,15),calc_vol(0.9,15)]';
+surface_area = [calc_surf(0.1,1),calc_surf(0.2,1),calc_surf(0.3,1),calc_surf(0.4,1),calc_surf(0.5,1),calc_surf(0.6,1),calc_surf(0.7,1),calc_surf(0.8,1),calc_surf(0.9,1);...
+    calc_surf(0.1,2),calc_surf(0.2,2),calc_surf(0.3,2),calc_surf(0.4,2),calc_surf(0.5,2),calc_surf(0.6,2),calc_surf(0.7,2),calc_surf(0.8,2),calc_surf(0.9,2);...
+    calc_surf(0.1,3),calc_surf(0.2,3),calc_surf(0.3,3),calc_surf(0.4,3),calc_surf(0.5,3),calc_surf(0.6,3),calc_surf(0.7,3),calc_surf(0.8,3),calc_surf(0.9,3);...
+    calc_surf(0.1,4),calc_surf(0.2,4),calc_surf(0.3,4),calc_surf(0.4,4),calc_surf(0.5,4),calc_surf(0.6,4),calc_surf(0.7,4),calc_surf(0.8,4),calc_surf(0.9,4);...
+    calc_surf(0.1,5),calc_surf(0.2,5),calc_surf(0.3,5),calc_surf(0.4,5),calc_surf(0.5,5),calc_surf(0.6,5),calc_surf(0.7,5),calc_surf(0.8,5),calc_surf(0.9,5);...
+    calc_surf(0.1,6),calc_surf(0.2,6),calc_surf(0.3,6),calc_surf(0.4,6),calc_surf(0.5,6),calc_surf(0.6,6),calc_surf(0.7,6),calc_surf(0.8,6),calc_surf(0.9,6);...
+    calc_surf(0.1,7),calc_surf(0.2,7),calc_surf(0.3,7),calc_surf(0.4,7),calc_surf(0.5,7),calc_surf(0.6,7),calc_surf(0.7,7),calc_surf(0.8,7),calc_surf(0.9,7);...
+    calc_surf(0.1,8),calc_surf(0.2,8),calc_surf(0.3,8),calc_surf(0.4,8),calc_surf(0.5,8),calc_surf(0.6,8),calc_surf(0.7,8),calc_surf(0.8,8),calc_surf(0.9,8);...
+    calc_surf(0.1,9),calc_surf(0.2,9),calc_surf(0.3,9),calc_surf(0.4,9),calc_surf(0.5,9),calc_surf(0.6,9),calc_surf(0.7,9),calc_surf(0.8,9),calc_surf(0.9,9);...
+    calc_surf(0.1,10),calc_surf(0.2,10),calc_surf(0.3,10),calc_surf(0.4,10),calc_surf(0.5,10),calc_surf(0.6,10),calc_surf(0.7,10),calc_surf(0.8,10),calc_surf(0.9,10);...
+    calc_surf(0.1,11),calc_surf(0.2,11),calc_surf(0.3,11),calc_surf(0.4,11),calc_surf(0.5,11),calc_surf(0.6,11),calc_surf(0.7,11),calc_surf(0.8,11),calc_surf(0.9,11);...
+    calc_surf(0.1,12),calc_surf(0.2,12),calc_surf(0.3,12),calc_surf(0.4,12),calc_surf(0.5,12),calc_surf(0.6,12),calc_surf(0.7,12),calc_surf(0.8,12),calc_surf(0.9,12);...
+    calc_surf(0.1,13),calc_surf(0.2,13),calc_surf(0.3,13),calc_surf(0.4,13),calc_surf(0.5,13),calc_surf(0.6,13),calc_surf(0.7,13),calc_surf(0.8,13),calc_surf(0.9,13);...
+    calc_surf(0.1,14),calc_surf(0.2,14),calc_surf(0.3,14),calc_surf(0.4,14),calc_surf(0.5,14),calc_surf(0.6,14),calc_surf(0.7,14),calc_surf(0.8,14),calc_surf(0.9,14);...
+    calc_surf(0.1,15),calc_surf(0.2,15),calc_surf(0.3,15),calc_surf(0.4,15),calc_surf(0.5,15),calc_surf(0.6,15),calc_surf(0.7,15),calc_surf(0.8,15),calc_surf(0.9,15)]';
+N_unit = 1:15;
+D = 0.1:0.1:0.9;
+%%
+subplot(2,2,1)
+plot(N_unit,surface_area(1,:));hold on
+plot(N_unit,surface_area(2,:));plot(N_unit,surface_area(3,:));plot(N_unit,surface_area(4,:));plot(N_unit,surface_area(5,:));
+plot(N_unit,surface_area(6,:));plot(N_unit,surface_area(7,:));plot(N_unit,surface_area(8,:));plot(N_unit,surface_area(9,:))
+subplot(2,2,3)
+plot(N_unit,vacuum_region(1,:));hold on
+plot(N_unit,vacuum_region(2,:));plot(N_unit,vacuum_region(3,:));plot(N_unit,vacuum_region(4,:));plot(N_unit,vacuum_region(5,:));
+plot(N_unit,vacuum_region(6,:));plot(N_unit,vacuum_region(7,:));plot(N_unit,vacuum_region(8,:));plot(N_unit,vacuum_region(9,:))
+subplot(2,2,2)
+plot(D,surface_area(:,1));hold on
+plot(D,surface_area(:,2));plot(D,surface_area(:,3));plot(D,surface_area(:,4));plot(D,surface_area(:,5));
+plot(D,surface_area(:,6));plot(D,surface_area(:,7));plot(D,surface_area(:,8));plot(D,surface_area(:,9));plot(N_unit,surface_area(:,10));
+plot(N_unit,surface_area(:,11));plot(N_unit,surface_area(:,12));plot(N_unit,surface_area(:,13));plot(N_unit,surface_area(:,14));plot(N_unit,surface_area(15,:));
+subplot(2,2,4)
+plot(D,vacuum_region(:,1));hold on
+plot(D,vacuum_region(:,2));plot(D,vacuum_region(:,3));plot(D,vacuum_region(:,4));plot(D,vacuum_region(:,5));
+plot(D,vacuum_region(:,6));plot(D,vacuum_region(:,7));plot(D,vacuum_region(:,8));plot(D,vacuum_region(:,9));plot(N_unit,vacuum_region(:,10));
+plot(N_unit,vacuum_region(:,11));plot(N_unit,vacuum_region(:,12));plot(N_unit,vacuum_region(:,13));plot(N_unit,vacuum_region(:,14));plot(N_unit,vacuum_region(15,:));
+
+%% functions
+function vol = calc_vol(rad,n)
+vol_vac = pi*rad^2*50;
+bench = 100*100*50;
+vol = bench-n*vol_vac;
+end
+
+function surf = calc_surf(rad,n)
+surf = n*2*pi*rad*50;
+end
+

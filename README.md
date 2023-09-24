@@ -24,6 +24,19 @@ Copyright &copy; 2022, Hanfeng Zhai, Cornell University
   pages = {269--279},
   author = {Hanfeng Zhai and Jingjie Yeo},
   title = {Computational Design of Antimicrobial Active Surfaces via Automated Bayesian Optimization},
-  journal = {{ACS} Biomaterials Science {\&}amp$\mathsemicolon$ Engineering}
+  journal = {{ACS} Biomaterials Science {\&} Engineering}
+}
+```
+```
+@article{Zhai2023,
+  doi = {10.1016/j.jmbbm.2023.106127},
+  url = {https://doi.org/10.1016/j.jmbbm.2023.106127},
+  year = {2023},
+  month = sep,
+  publisher = {Elsevier {BV}},
+  pages = {106127},
+  author = {Hanfeng Zhai and Jingjie Yeo},
+  title = {Controlling biofilm transport with porous metamaterials designed with Bayesian learning},
+  journal = {Journal of the Mechanical Behavior of Biomedical Materials}
 }
 ```
